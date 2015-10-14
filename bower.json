@@ -1,0 +1,24 @@
+{
+    "name": "bormgruppe-slimbox",
+    "version": "2.0.6",
+    "homepage": "https://github.com/bormgruppe/slimbox",
+    "authors": [
+        "bormgruppe"
+    ],
+    "description": "A slimbox fork for specific needs of the Borm applications",
+    "main": "js/slimbox2.js",
+    "moduleType": [],
+    "keywords": [
+        "slimbox",
+        "jquery"
+    ],
+    "license": "MIT",
+    "ignore": [
+        "example.html",
+        "example.jpg",
+        "node_modules",
+        "bower_components",
+        "test",
+        "tests"
+    ]
+}
