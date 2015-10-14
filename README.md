@@ -13,10 +13,18 @@ Setup
 
 Please read the [Manual](https://github.com/cbeyls/slimbox/wiki/jQuery-Manual) page on the Wiki.
 
+Development
+-----------
+Clone the repository and run `npm install` to install all development dependencies.
+You can then run `npm run` to start a development server and show the example page.
+Using `npm run-script` rebuild you can recreate the minified files in the dist directory.
+
 Credits
 -------
 
 by [Christophe Beyls](http://www.digitalia.be/).
+
+Adapted by the team at [BormGruppe](https://github.com/bormgruppe/)
 
 License
 -------
