@@ -190,9 +190,38 @@
 
 	function animateBox() {
 		center.className = "";
-		$(image).css({backgroundImage: "url(" + activeURL + ")", visibility: "hidden", display: ""});
-		$(sizer).width(preload.width);
-		$([sizer, prevLink, nextLink]).height(preload.height);
+
+		var winWidth  = window.innerWidth  - 20;
+		var winHeight = window.innerHeight - 120;
+
+		var my_w = preload.width;
+		var my_h = preload.height;
+
+		var sclx = 1.0;
+		if (my_w > winWidth) {
+			sclx = winWidth / my_w;
+		}
+
+		var scly = 1.0;
+		if (my_h > winHeight) {
+			scly = winHeight / my_h;
+		}
+
+		var scl = Math.min(sclx, scly);
+		if (scl < 1) {
+			my_w *= scl;
+			my_h *= scl;
+		}
+
+		if (preload.width > my_w || preload.height > my_h){ /* constrain it */
+			$(image).css({ backgroundImage: "url(" + activeURL + ")", backgroundSize: my_w + "px " + my_h + "px", visibility: "hidden", display: "" });
+			$(sizer).width(my_w);
+			$([sizer, prevLink, nextLink]).height(my_h);
+		} else { /* default behaviour  NORMAL before hacking */
+			$(image).css({ backgroundImage: "url(" + activeURL + ")", backgroundSize: "", visibility: "hidden", display: "" });
+			$(sizer).width(preload.width);
+			$([sizer, prevLink, nextLink]).height(preload.height);
+		}
 
 		$(caption).html(images[activeImage][1] || "");
 		$(number).html((((images.length > 1) && options.counterText) || "").replace(/{x}/, activeImage + 1).replace(/{y}/, images.length));
