@@ -188,40 +188,42 @@
 		return false;
 	}
 
+    function scaleToFitInWindow(size) {
+        // subtract a padding from the window width and height
+        // to accommodate for the border around the image
+        var winWidth = window.innerWidth - 20;
+        var winHeight = window.innerHeight - 120;
+
+        var scaleX = 1.0;
+        if (size.width > winWidth) {
+            scaleX = winWidth / size.width;
+        }
+
+        var scaleY = 1.0;
+        if (size.height > winHeight) {
+            scaleY = winHeight / size.height;
+        }
+
+        var minScale = Math.min(scaleX, scaleY);
+        if (minScale < 1.0) {
+            size.width *= minScale;
+            size.height *= minScale;
+        }
+    }
+
 	function animateBox() {
 		center.className = "";
 
-		var winWidth  = window.innerWidth  - 20;
-		var winHeight = window.innerHeight - 120;
+        var size = {
+            width: preload.width,
+            height: preload.height
+        };
 
-		var my_w = preload.width;
-		var my_h = preload.height;
+        scaleToFitInWindow(size);
 
-		var sclx = 1.0;
-		if (my_w > winWidth) {
-			sclx = winWidth / my_w;
-		}
-
-		var scly = 1.0;
-		if (my_h > winHeight) {
-			scly = winHeight / my_h;
-		}
-
-		var scl = Math.min(sclx, scly);
-		if (scl < 1) {
-			my_w *= scl;
-			my_h *= scl;
-		}
-
-		if (preload.width > my_w || preload.height > my_h){ /* constrain it */
-			$(image).css({ backgroundImage: "url(" + activeURL + ")", backgroundSize: my_w + "px " + my_h + "px", visibility: "hidden", display: "" });
-			$(sizer).width(my_w);
-			$([sizer, prevLink, nextLink]).height(my_h);
-		} else { /* default behaviour  NORMAL before hacking */
-			$(image).css({ backgroundImage: "url(" + activeURL + ")", backgroundSize: "", visibility: "hidden", display: "" });
-			$(sizer).width(preload.width);
-			$([sizer, prevLink, nextLink]).height(preload.height);
-		}
+        $(image).css({ backgroundImage: "url(" + activeURL + ")", backgroundSize: size.width + "px " + size.height + "px", visibility: "hidden", display: "" });
+        $(sizer).width(size.width);
+        $([sizer, prevLink, nextLink]).height(size.height);
 
 		$(caption).html(images[activeImage][1] || "");
 		$(number).html((((images.length > 1) && options.counterText) || "").replace(/{x}/, activeImage + 1).replace(/{y}/, images.length));
