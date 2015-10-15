@@ -23,12 +23,11 @@ gulp.task('concat-js', ['minify-js'], function(){
     return gulp.src(['./dist/slimbox2.min.js', './dist/autoload.min.js'])
         .pipe(concat('slimbox2-autoload.min.js'))
         .pipe(gulp.dest('./dist/'));
-})
+});
 
 gulp.task('rebuild-all', function(){
     runSequence('clean', 'concat-js');
 });
-
 
 gulp.task('serve-example', function(){
     gulp.src('./')
