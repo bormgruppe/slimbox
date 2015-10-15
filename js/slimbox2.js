@@ -188,42 +188,42 @@
 		return false;
 	}
 
-    function scaleToFitInWindow(size) {
-        // subtract a padding from the window width and height
-        // to accommodate for the border around the image
-        var winWidth = window.innerWidth - 20;
-        var winHeight = window.innerHeight - 120;
+	function scaleToFitInWindow(size) {
+		// subtract a padding from the window width and height
+		// to accommodate for the border around the image
+		var winWidth = window.innerWidth - 20;
+		var winHeight = window.innerHeight - 120;
 
-        var scaleX = 1.0;
-        if (size.width > winWidth) {
-            scaleX = winWidth / size.width;
-        }
+		var scaleX = 1.0;
+		if (size.width > winWidth) {
+			scaleX = winWidth / size.width;
+		}
 
-        var scaleY = 1.0;
-        if (size.height > winHeight) {
-            scaleY = winHeight / size.height;
-        }
+		var scaleY = 1.0;
+		if (size.height > winHeight) {
+			scaleY = winHeight / size.height;
+		}
 
-        var minScale = Math.min(scaleX, scaleY);
-        if (minScale < 1.0) {
-            size.width *= minScale;
-            size.height *= minScale;
-        }
-    }
+		var minScale = Math.min(scaleX, scaleY);
+		if (minScale < 1.0) {
+			size.width *= minScale;
+			size.height *= minScale;
+		}
+	}
 
 	function animateBox() {
 		center.className = "";
 
-        var size = {
-            width: preload.width,
-            height: preload.height
-        };
+		var size = {
+			width: preload.width,
+			height: preload.height
+		};
 
-        scaleToFitInWindow(size);
+		scaleToFitInWindow(size);
 
-        $(image).css({ backgroundImage: "url(" + activeURL + ")", backgroundSize: size.width + "px " + size.height + "px", visibility: "hidden", display: "" });
-        $(sizer).width(size.width);
-        $([sizer, prevLink, nextLink]).height(size.height);
+		$(image).css({ backgroundImage: "url(" + activeURL + ")", backgroundSize: size.width + "px " + size.height + "px", visibility: "hidden", display: "" });
+		$(sizer).width(size.width);
+		$([sizer, prevLink, nextLink]).height(size.height);
 
 		$(caption).html(images[activeImage][1] || "");
 		$(number).html((((images.length > 1) && options.counterText) || "").replace(/{x}/, activeImage + 1).replace(/{y}/, images.length));
