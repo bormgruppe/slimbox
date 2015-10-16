@@ -188,6 +188,12 @@
 		return false;
 	}
 
+    /**
+     * Adjusts the size object in place to fit into the current window
+     * @param {Object} size - The current size which will be adjusted
+     * @param {number} size.width - current width
+     * @param {number} size.height - current height
+     */
 	function scaleToFitInWindow(size) {
 		// subtract a padding from the window width and height
 		// to accommodate for the border around the image
