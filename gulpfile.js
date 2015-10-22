@@ -7,9 +7,7 @@ var runSequence = require('run-sequence');
 var concat = require('gulp-concat');
 
 // used to serve the example
-var connect = require('connect');
-var static = require('serve-static');
-var open = require('open');
+var webserve = require('web-serve');
 
 gulp.task('clean', function(){
     return del.sync('./dist/**');
@@ -34,19 +32,12 @@ gulp.task('rebuild-all', function(){
     runSequence('clean', 'concat-js');
 });
 
-// Serve dir at port and open the browser at path (relative to dir)
-var serveAndOpen = function(dir, port, path) {
-    connect()
-        .use(static(dir))
-        .listen(port, function() {
-            gutil.log('Starting webserver on port ' + port);
-            var openPath = 'http://localhost:' + port + '/' + path;
-            gutil.log('Opening browser at ' + openPath);
-            open(openPath);
-        });
-};
-
 gulp.task('serve-example', function(){
-    serveAndOpen('./', 8000, 'example.html');
+    gutil.log('Starting to serve example at http://localhost:8000/example.html');
+    webserve({
+        rootDir: './',
+        openFilePath: 'example.html',
+        port: 8000
+    });
 });
 
