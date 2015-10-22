@@ -35,9 +35,7 @@ gulp.task('rebuild-all', function(){
 gulp.task('serve-example', function(){
     gutil.log('Starting to serve example at http://localhost:8000/example.html');
     webserve({
-        rootDir: './',
-        openFilePath: 'example.html',
-        port: 8000
+        openFilePath: 'example.html'
     });
 });
 
